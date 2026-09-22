@@ -381,6 +381,7 @@
 		<Compile Include="Moon Items\Core.cs" />
 		<Compile Include="Moon Items\CorePatches.cs" />
 		<Compile Include="Moon Items\Items\HalfMoon.cs" />
+		<Compile Include="Moon Items\Items\SmilingMoon.cs" />
 		<Compile Include="Moon Items\TileSelectionPatches.cs" />
 		<Content Include="Directory.Build.props" />
 	</ItemGroup>

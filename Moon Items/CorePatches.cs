@@ -21,6 +21,7 @@ namespace Moon_Items
             if (__instance.GetName().Name == "Assembly-CSharp")
             {
                 __result = [.. __result, .. Assembly.GetAssembly(typeof(HalfMoon)).GetTypes()];
+                __result = [.. __result, .. Assembly.GetAssembly(typeof(SmilingMoon)).GetTypes()];
             }
         }
     }
@@ -41,7 +42,8 @@ namespace Moon_Items
                     MelonLogger.Msg("Can't find item in the game, checking modded items");
                     List<Item> moddedItems = new List<Item>
                     {
-                        new HalfMoon()
+                        new HalfMoon(),
+                        new SmilingMoon()
                     };
 
                     string argument = args[1];
@@ -49,17 +51,22 @@ namespace Moon_Items
                     {
                         MelonLogger.Msg("Modded item found");
                         type = moddedItems.FirstOrDefault(item => item.GetType().ToString().Split('.').Last() == argument).GetType();
-
+                        MelonLogger.Msg("Set variable type to the type of that item");
                         if (type != null && type.IsSubclassOf(typeof(Item)))
                         {
+                            MelonLogger.Msg("if statement passed");
                             Item item2 = System.Activator.CreateInstance(type) as Item;
+                            MelonLogger.Msg("item2 set to an instane of that item");
                             if (args.Length >= 3 && (args[2] == "-f" || args[2] == "-foil"))
                             {
                                 item2.IsFoil = true;
                             }
+                            MelonLogger.Msg("Set whether or not it's foil");
                             GameStatics.GetPlayer().AddItemToInventory(item2);
+                            MelonLogger.Msg("Added to inventory");
                             CharacterInfoPanel.SingletonInventoryVisualController.PopulateAll();
-                            MelonLogger.Msg("Gave Item: " + item2.Name);
+                            MelonLogger.Msg("populated the inventory");
+                            //MelonLogger.Msg("Gave Item: " + item2.Name);
                         }
                     }
                     else

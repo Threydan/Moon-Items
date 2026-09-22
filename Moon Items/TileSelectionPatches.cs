@@ -19,9 +19,10 @@ namespace Moon_Items
             #region Original code that needs to be repeated
             if (currentTiles.Count() == 0) 
             {
-                return; 
+                return;
             }
 
+            Tile currentTile = currentTiles[^1];
             Player player = GameStatics.GetPlayer();
             List<Item> list = (noInventory ? new List<Item>() : player.GetAllItems());
             Item item = list.Find((Item item4) => item4 is RandomAccessMemory);
@@ -50,19 +51,32 @@ namespace Moon_Items
             #region items
             if (list.Exists((Item item4) => item4 is HalfMoon))
             {
-                Tile currentTile = currentTiles[^1];
                 Tile tile = gridData.GetAvailableTileAtCoordinates(
                     gridData.Dimensions.x - currentTile.Coordinates.x - 1, 
                     gridData.Dimensions.y - currentTile.Coordinates.y - 1);
                 if (tile != null && !currentTiles.Exists(tile4 => tile4 == tile))
                 {
-                    __result.AddRange
+                    __result.Add
                         (
-                            [new TileSelection(tile, TileSelectionMethod.FullMoon, tile.IsDisplayingAsVariableLetter(tileSelectionManager))]
+                            new TileSelection(tile, TileSelectionMethod.FullMoon, tile.IsDisplayingAsVariableLetter(tileSelectionManager))
                         );
                 }
             }
 
+            if (list.Exists((Item item4) => item4 is SmilingMoon)) 
+            {
+                SmilingMoon moonitem = list.FirstOrDefault((Item item4) => item4 is SmilingMoon) as SmilingMoon;
+                Tile tile = gridData.GetAvailableTileAtCoordinates(
+                moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].x,
+                moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].y);
+                if (tile != null && !currentTiles.Exists(tile4 => tile4 == tile))
+                {
+                    __result.Add
+                        (
+                            new TileSelection(tile, TileSelectionMethod.FullMoon, tile.IsDisplayingAsVariableLetter(tileSelectionManager))
+                        );
+                }
+            }
             #endregion
         }
     }
