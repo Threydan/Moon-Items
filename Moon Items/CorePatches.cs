@@ -20,8 +20,9 @@ namespace Moon_Items
         {
             if (__instance.GetName().Name == "Assembly-CSharp")
             {
-                __result = [.. __result, .. Assembly.GetAssembly(typeof(HalfMoon)).GetTypes()];
-                __result = [.. __result, .. Assembly.GetAssembly(typeof(SmilingMoon)).GetTypes()];
+                __result = [.. __result, .. Assembly.GetAssembly(typeof(HalfMoon)).GetTypes(),
+                            .. Assembly.GetAssembly(typeof(SmilingMoon)).GetTypes(), 
+                            .. Assembly.GetAssembly(typeof(CrescentMoon)).GetTypes()];
             }
         }
     }
@@ -43,7 +44,8 @@ namespace Moon_Items
                     List<Item> moddedItems = new List<Item>
                     {
                         new HalfMoon(),
-                        new SmilingMoon()
+                        new SmilingMoon(),
+                        new CrescentMoon()
                     };
 
                     string argument = args[1];

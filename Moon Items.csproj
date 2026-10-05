@@ -380,6 +380,7 @@
 	<ItemGroup>
 		<Compile Include="Moon Items\Core.cs" />
 		<Compile Include="Moon Items\CorePatches.cs" />
+		<Compile Include="Moon Items\Items\CrescentMoon.cs" />
 		<Compile Include="Moon Items\Items\HalfMoon.cs" />
 		<Compile Include="Moon Items\Items\SmilingMoon.cs" />
 		<Compile Include="Moon Items\TileSelectionPatches.cs" />

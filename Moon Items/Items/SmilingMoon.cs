@@ -41,7 +41,7 @@ namespace Moon_Items.Items
                     if (isCOTVrun == true)
                     {
                         //Clamp the value to have either x or y become either 0 or 5 so that the random vector will always point to a location on the edge of the grid
-                        //This does mean that the 4 corner tiles are twice as likely to appear, but this is the simplest way to make sure that getting this item in a COTV run is worthwhile
+                        //This does mean that the 4 corner tiles are twice as likely to appear as any other tile, but this is the simplest way to make sure that getting this item in a COTV run is worthwhile
                         int MinOrMax = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? 0 : 5;
                         if (Convert.ToBoolean(UnityEngine.Random.Range(0, 2))) { vector.x = MinOrMax; }
                         else { vector.y = MinOrMax; }

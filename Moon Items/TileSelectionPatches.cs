@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static System.Net.WebRequestMethods;
 
 namespace Moon_Items
 {
@@ -17,7 +18,7 @@ namespace Moon_Items
             //Since Postfix cannot access variables created inside of the function (at least from what i can tell), this code
             //has to be repeated. It might be possible with other harmonypatch methods but i'm not good enough yet to understand those
             #region Original code that needs to be repeated
-            if (currentTiles.Count() == 0) 
+            if (currentTiles.Count() == 0)
             {
                 return;
             }
@@ -52,8 +53,8 @@ namespace Moon_Items
             if (list.Exists((Item item4) => item4 is HalfMoon))
             {
                 Tile tile = gridData.GetAvailableTileAtCoordinates(
-                    gridData.Dimensions.x - currentTile.Coordinates.x - 1, 
-                    gridData.Dimensions.y - currentTile.Coordinates.y - 1);
+                    gridData.Dimensions.x - 1 - currentTile.Coordinates.x,
+                    gridData.Dimensions.y - 1 - currentTile.Coordinates.y);
                 if (tile != null && !currentTiles.Exists(tile4 => tile4 == tile))
                 {
                     __result.Add
@@ -63,19 +64,30 @@ namespace Moon_Items
                 }
             }
 
-            if (list.Exists((Item item4) => item4 is SmilingMoon)) 
+            if (list.Exists((Item item4) => item4 is SmilingMoon))
             {
                 SmilingMoon moonitem = list.FirstOrDefault((Item item4) => item4 is SmilingMoon) as SmilingMoon;
                 Tile tile = gridData.GetAvailableTileAtCoordinates(
-                moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].x,
-                moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].y);
-                if (tile != null && !currentTiles.Exists(tile4 => tile4 == tile))
+                    moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].x,
+                    moonitem.RandomTiles[currentTile.Coordinates.x][currentTile.Coordinates.y].y);
+                if (tile != null && !currentTiles.Contains(tile))
                 {
-                    __result.Add
-                        (
-                            new TileSelection(tile, TileSelectionMethod.FullMoon, tile.IsDisplayingAsVariableLetter(tileSelectionManager))
-                        );
+                    __result.Add(new TileSelection(tile, TileSelectionMethod.FullMoon, tile.IsDisplayingAsVariableLetter(tileSelectionManager)));
                 }
+            }
+
+            if (list.Exists((Item item4) => item4 is CrescentMoon))
+            {
+                List<Tile> Corners = new List<Tile>
+                {
+                    gridData.GetAvailableTileAtCoordinates(0, 0),
+                    gridData.GetAvailableTileAtCoordinates(0, gridData.Dimensions.y - 1),
+                    gridData.GetAvailableTileAtCoordinates(gridData.Dimensions.x - 1, 0),
+                    gridData.GetAvailableTileAtCoordinates(gridData.Dimensions.x - 1, gridData.Dimensions.y - 1)
+                };
+                __result.AddRange(from tile2 in Corners
+                    where tile2 != null && !currentTiles.Contains(tile2)
+                    select new TileSelection(tile2, TileSelectionMethod.FullMoon, tile2.IsDisplayingAsVariableLetter(tileSelectionManager)));
             }
             #endregion
         }
