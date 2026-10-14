@@ -13,8 +13,8 @@ namespace Moon_Items.Items
         public CrescentMoon()
         {
             Name = "Crescent Moon";
-            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]CrescentMoon_0"));
-            Rarity = ItemRarity.Common;
+            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]CrescentMoon"));
+            Rarity = ItemRarity.Rare;
             Tags = new List<ItemTag>
             {
                 ItemTag.WordEntryManipulation

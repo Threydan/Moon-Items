@@ -13,7 +13,7 @@ namespace Moon_Items.Items
         public HalfMoon()
         {
             Name = "Half Moon";
-            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]HalfMoon_0"));
+            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]HalfMoon"));
             Rarity = ItemRarity.Common;
             Tags = new List<ItemTag>
             {
@@ -23,7 +23,7 @@ namespace Moon_Items.Items
             {
                 ItemFunctionTag.Tech
             };
-            Cost = 11;
+            Cost = 15;
         }
 
         public override string GetDescription()

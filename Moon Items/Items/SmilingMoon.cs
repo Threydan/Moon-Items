@@ -10,8 +10,8 @@ namespace Moon_Items.Items
         public SmilingMoon()
         {
             Name = "Smiling Moon";
-            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]SmilingMoon_0"));
-            Rarity = ItemRarity.Common;
+            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]SmilingMoon"));
+            Rarity = ItemRarity.Rare;
             Tags = new List<ItemTag>
             {
                 ItemTag.WordEntryManipulation
@@ -20,7 +20,7 @@ namespace Moon_Items.Items
             {
                 ItemFunctionTag.Tech
             };
-            Cost = 11;
+            Cost = 10;
         }
         public List<List<Vector2Int>> RandomTiles = new List<List<Vector2Int>> { };
 
