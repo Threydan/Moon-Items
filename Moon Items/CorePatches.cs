@@ -20,9 +20,7 @@ namespace Moon_Items
         {
             if (__instance.GetName().Name == "Assembly-CSharp")
             {
-                __result = [.. __result, .. Assembly.GetAssembly(typeof(HalfMoon)).GetTypes(),
-                            .. Assembly.GetAssembly(typeof(SmilingMoon)).GetTypes(), 
-                            .. Assembly.GetAssembly(typeof(CrescentMoon)).GetTypes()];
+                __result = [.. __result, .. Assembly.GetAssembly(typeof(HalfMoon)).GetTypes()];
             }
         }
     }
@@ -66,8 +64,32 @@ namespace Moon_Items
                         }
                     }
                     else
+                    {
                         MelonLogger.Msg("Item Not Found Even In Modded Items");
+                    }
                     return;
+                }
+            }
+        }
+    }
+
+    // If the item has my mod signature in the assetpath of the ItemspriteData, attempt to retrieve the sprite from the ones loaded from my assetbundle at game launch
+    // (See ItemSprites[] and OnApplicationStart() in Core.cs)
+    [HarmonyPatch(typeof(ItemSpriteData), "GetSprite")]
+    static class ItemSpriteData_GetSprite_Patch
+    {
+        static void Prefix(ItemSpriteData __instance)
+        {
+            if (__instance.AssetPath.IndexOf("[MoonItems]") != -1)
+            {
+                try
+                {
+                    __instance.ItemSprite = Core.ItemSprites[__instance.AssetPath.Substring(11)];
+                }
+                catch
+                {
+                    MelonLogger.Msg($"[MoonItems] Couldn't find the item asset \"{__instance.AssetPath.Substring(11)}\". Defaulting to a full moon sprite");
+                    __instance.AssetPath = "FullMoon";
                 }
             }
         }

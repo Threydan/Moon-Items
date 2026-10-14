@@ -10,7 +10,7 @@ namespace Moon_Items.Items
         public SmilingMoon()
         {
             Name = "Smiling Moon";
-            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "FullMoon"));
+            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]SmilingMoon_0"));
             Rarity = ItemRarity.Common;
             Tags = new List<ItemTag>
             {

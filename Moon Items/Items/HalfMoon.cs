@@ -13,7 +13,7 @@ namespace Moon_Items.Items
         public HalfMoon()
         {
             Name = "Half Moon";
-            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "FullMoon"));
+            SpriteData.Add(new ItemSpriteData(ItemSpriteUsage.Default, "[MoonItems]HalfMoon_0"));
             Rarity = ItemRarity.Common;
             Tags = new List<ItemTag>
             {
